@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/rkanmado/42 Path/ft_printf'
+make: Leaving directory `/Users/rkanmado/42 Path/ft_printf'
+ 
+make: *** No targets.  Stop.
+
