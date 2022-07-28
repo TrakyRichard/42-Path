@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/27 05:19:26 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/07/28 05:49:19 by rkanmado         ###   ########.fr       */
+/*   Created: 2022/07/28 01:39:04 by rkanmado          #+#    #+#             */
+/*   Updated: 2022/07/28 06:03:10 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_read(char *res, int fd)
 {
@@ -41,17 +41,21 @@ void	ft_get_line(char *buffer, t_gnl *t_gnl)
 	while (buffer[t_gnl->line_chars_count] != '\n' \
 		&& buffer[t_gnl->line_chars_count] != '\0')
 		t_gnl->line_chars_count++;
-	t_gnl->line = malloc(t_gnl->line_chars_count + 2 * sizeof(char));
+	t_gnl->line = malloc((t_gnl->line_chars_count + 1) * sizeof(char));
 	if (t_gnl->line == NULL)
 		return ;
-	while (t_gnl->line_chars_count > t_gnl->counter && *buffer != '\0')
+	if (t_gnl->line_chars_count == 0)
+	{
+		t_gnl->line[0] = '\0';
+		return ;
+	}
+	while (t_gnl->line_chars_count > t_gnl->counter)
 	{
 		t_gnl->line[t_gnl->counter++] = *buffer;
 		buffer++;
 	}
-	if (*buffer == '\n' )
+	if (*buffer != '\0')
 		buffer++;
-	t_gnl->line[t_gnl->counter] = '\0';
 	t_gnl->next_buffer = buffer;
 	return ;
 }
@@ -67,16 +71,14 @@ void	init_var(t_gnl *t_gnl)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[FD_SIZE];
 	t_gnl		t_gnl;
 
 	init_var(&t_gnl);
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 && BUFFER_SIZE >= 0)
 		return (NULL);
-	buffer = ft_read(buffer, fd);
-	if (!buffer)
-		return (NULL);
-	ft_get_line(buffer, &t_gnl);
-	buffer = t_gnl.next_buffer;
+	buffer[fd] = ft_read(buffer[fd], fd);
+	ft_get_line(buffer[fd], &t_gnl);
+	buffer[fd] = t_gnl.next_buffer;
 	return (t_gnl.line);
 }

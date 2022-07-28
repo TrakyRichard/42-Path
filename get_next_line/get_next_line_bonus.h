@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 05:37:53 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/07/28 04:07:55 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/07/28 04:11:23 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000
+# endif
+# ifndef FD_SIZE
+#  define FD_SIZE 65535
 # endif
 # include <stdio.h>
 # include <unistd.h>
@@ -35,5 +38,6 @@ char	*ft_strcat(char *s1, char *s2);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *s, int c);
 size_t	ft_strlen(char *s);
+char	*ft_strdup(const char *s1);
 
 #endif

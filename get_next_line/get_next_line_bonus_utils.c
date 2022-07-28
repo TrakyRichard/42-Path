@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_bonus_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkanmado <rkanmado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 05:17:10 by rkanmado          #+#    #+#             */
-/*   Updated: 2022/07/28 06:03:48 by rkanmado         ###   ########.fr       */
+/*   Updated: 2022/07/28 06:04:20 by rkanmado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *s)
 {
@@ -68,9 +68,9 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1 = malloc(sizeof(char));
 		if (s1 == NULL)
 			return (NULL);
-		*s1 = '\0';
+		s1 = "";
 	}
-	if (s2 == NULL)
+	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	len = (ft_strlen(s1) + ft_strlen(s2) + 1);
 	result = malloc(len * sizeof(char));
